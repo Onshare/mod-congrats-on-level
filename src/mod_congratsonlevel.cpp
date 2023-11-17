@@ -244,7 +244,7 @@ public:
             {
                 // Issue a raid warning to the player
                 std::ostringstream msg;
-                msg << "恭喜你达到 " << level << " 级！奖励" << money << "金币和一些特殊物品。";
+                msg << "恭喜你达到 " << level << " 级！奖励" << (money / GOLD) << "金币和一些特殊物品。";
                 ChatHandler(player->GetSession()).PSendSysMessage(msg.str().c_str());
                 checkPlayerRecruitment(player, rewardLevel);
             }
