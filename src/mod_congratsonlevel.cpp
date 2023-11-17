@@ -82,7 +82,7 @@ uint32 giveAward(Player* player)
     QueryResult result = WorldDatabase.Query("SELECT * FROM `mod_congrats_on_level_items` WHERE `level`={} AND (`race`={} OR `race`=0) AND (`class`={} OR `class`=0)", player->getLevel(), player->getRace(), player->getClass());
 
     uint32 money = 0;
-
+    LOG_INFO("giveAward", "result size get");
     if (result)
     {
         do
@@ -104,6 +104,7 @@ uint32 giveAward(Player* player)
                 player->AddItem(fields[4].Get<uint32>(), 1);
             if (fields[5].Get<uint32>())
                 player->AddItem(fields[5].Get<uint32>(), 1);
+            LOG_INFO("giveAward", "result size get once");
         }
         while (result->NextRow());
 
@@ -244,7 +245,7 @@ public:
             {
                 // Issue a raid warning to the player
                 std::ostringstream msg;
-                msg << "恭喜你达到 " << level << " 级！奖励" << (money / GOLD) << "金币和一些特殊物品。";
+                msg << "恭喜你达到 " << rewardLevel << " 级！奖励" << (money / GOLD) << "金币和一些特殊物品。";
                 ChatHandler(player->GetSession()).PSendSysMessage(msg.str().c_str());
                 checkPlayerRecruitment(player, rewardLevel);
             }
