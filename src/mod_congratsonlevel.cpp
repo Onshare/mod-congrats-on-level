@@ -246,7 +246,7 @@ public:
                 std::ostringstream msg;
                 msg << "恭喜你达到 " << level << " 级！奖励" << money << "金币和一些特殊物品。";
                 ChatHandler(player->GetSession()).PSendSysMessage(msg.str().c_str());
-                checkPlayerRecruitment(player, level);
+                checkPlayerRecruitment(player, rewardLevel);
             }
         }
     }
