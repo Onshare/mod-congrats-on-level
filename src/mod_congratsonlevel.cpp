@@ -82,7 +82,7 @@ uint32 giveAward(Player* player)
     QueryResult result = WorldDatabase.Query("SELECT * FROM `mod_congrats_on_level_items` WHERE `level`={} AND (`race`={} OR `race`=0) AND (`class`={} OR `class`=0)", player->getLevel(), player->getRace(), player->getClass());
 
     uint32 money = 0;
-    ChatHandler(player->GetSession()).PSendSysMessage("result size get");
+
     if (result)
     {
         do
@@ -104,7 +104,6 @@ uint32 giveAward(Player* player)
                 player->AddItem(fields[4].Get<uint32>(), 1);
             if (fields[5].Get<uint32>())
                 player->AddItem(fields[5].Get<uint32>(), 1);
-            ChatHandler(player->GetSession()).PSendSysMessage("result size get once");
         }
         while (result->NextRow());
 
@@ -152,11 +151,12 @@ public:
                 {
                     if (oldLevel < 2)
                     {
-                        ChatHandler(player->GetSession()).PSendSysMessage("oldLevel = {}, level={}", oldLevel, level);
                         money = giveAward(player);
                         rewardLevel = "2";
                     }
                 }
+                break;
+
                 case 10:
                 {
                     if (oldLevel < 10)
