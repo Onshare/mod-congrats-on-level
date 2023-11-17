@@ -152,6 +152,7 @@ public:
                 {
                     if (oldLevel < 2)
                     {
+                        ChatHandler(player->GetSession()).PSendSysMessage("oldLevel = {}, level={}", oldLevel, level);
                         money = giveAward(player);
                         rewardLevel = "2";
                     }
